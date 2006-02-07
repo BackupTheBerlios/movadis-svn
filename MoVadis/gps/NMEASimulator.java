@@ -49,11 +49,11 @@ public class NMEASimulator extends GPSReceiver implements Runnable {
 			// TODO calculate a correct checksum
 			String checksum = "*52";
 			
-			String crc = "*52";
 			String sentence = "$GPGGA,"+time+","+lat+",N,"+lon+",E,"+fix+","+sats+",09.5,29.0,M,45.7,M,,"+checksum;
 			informListeners(sentence);
 			try {
-				Thread.sleep(INTERVAL);
+				// If this thread has been canceled, we do not have to wait
+				if (simulating) Thread.sleep(INTERVAL);
 			} catch (InterruptedException e) {}
 		}
 	}
