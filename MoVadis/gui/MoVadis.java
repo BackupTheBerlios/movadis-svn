@@ -13,6 +13,7 @@ import gps.GPSDataReceivedListener;
 import gps.GPSDecoder;
 import gps.SentenceListener;
 
+import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.RemoteDevice;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
@@ -75,7 +76,13 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 			// this.destroyApp(false);
 			notifyDestroyed();
 		} else if (cmd == connectCommand) {
-			Displayable l = new BTDeviceList(this);
+			Displayable l = null;
+			try {
+				l = new BTDeviceList(this);
+			} catch (BluetoothStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			disp.setCurrent(l);
 		}
 	}

@@ -5,7 +5,6 @@
 package gui;
 
 import java.io.IOException;
-
 import gps.GPSData;
 import gps.GPSDataReceivedListener;
 import gps.Position;
@@ -18,6 +17,8 @@ import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.StringItem;
 
 public class PositionScreen extends Form implements SentenceListener, GPSDataReceivedListener {
+	private static int displayPrecision = 5;
+	
 	private StringItem lat;
 	private StringItem lon;
 	private StringItem info;
@@ -29,11 +30,11 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		//this.append("Position");
 		Image img = null;
 		try {
-			img = Image.createImage(this.getClass().getResourceAsStream("../res/movadis.png"));
+			img = Image.createImage(this.getClass().getResourceAsStream("../res/movadis-small.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ImageItem iitem = new ImageItem("Position", img, ImageItem.PLAIN, "");
+		ImageItem iitem = new ImageItem("Position", img, ImageItem.LAYOUT_LEFT | ImageItem.LAYOUT_TOP | ImageItem.PLAIN, "");
 		this.append(iitem);
 		
 		lat = new StringItem("Latitude: ", "?");
@@ -49,18 +50,24 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		this.append(info);
 	}
 	
+	private String shorten(double x) {
+		String xs = x+"";
+		// where is the .?
+		int dotpos = xs.indexOf(".");
+		
+		return xs.substring(0, dotpos+displayPrecision);
+	}
+	
 	public void SentenceReceived(String sentence) {
 		this.info.setText(sentence);
-		//Alert a = new Alert("DATA!", sentence, null, AlertType.INFO);
-		//disp.setCurrent(a, this);
 	}
 	
 	public void GPSDataReceived(GPSData gd) {
 		//Alert a = new Alert("posotion changed", p.getLat()+"/"+p.getLon(), null, AlertType.INFO);
 		//disp.setCurrent(a, this);
 		Position p = gd.getPosition();
-		lat.setText(p.getLat()+"°N");
-		lon.setText(p.getLon()+"°E");
+		lat.setText(shorten(p.getLat())+"°N");
+		lon.setText(shorten(p.getLon())+"°E");
 		
 		sat.setText(gd.getNumberOfSatellites()+"");
 		

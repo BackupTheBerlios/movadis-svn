@@ -27,11 +27,12 @@ public class BTDeviceList extends List implements DiscoveryListener, CommandList
 	
 	private static Command okCommand = new Command("OK", Command.OK, 0); 
 	private static Command cancelCommand = new Command("Cancel", Command.CANCEL, 0);
+	private static Command refreshCommand = new Command("Refresh", Command.SCREEN, 1);
 	
 	private Vector devices;
 	private DeviceSelectionListener listener;
 	
-	public BTDeviceList(DeviceSelectionListener listener) {
+	public BTDeviceList(DeviceSelectionListener listener) throws BluetoothStateException {
 		super("Bluetooth", List.EXCLUSIVE);
 		this.setCommandListener(this);
 		
@@ -39,23 +40,33 @@ public class BTDeviceList extends List implements DiscoveryListener, CommandList
 		
 		this.addCommand(okCommand);
 		this.addCommand(cancelCommand);
+		this.addCommand(refreshCommand);
 		
 		devices = new Vector();
-		try {
-			local = LocalDevice.getLocalDevice();
-			da = local.getDiscoveryAgent();
+		local = LocalDevice.getLocalDevice();
+
+		da = local.getDiscoveryAgent();
+		
+		refresh();
+	}
+	
+	private void refresh() throws BluetoothStateException {
+		synchronized (devices) {
+			this.deleteAll();
+			devices.removeAllElements();
+			da.cancelInquiry(this);
 			da.startInquiry(DiscoveryAgent.GIAC, this);
-		} catch (BluetoothStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
 	public void deviceDiscovered(RemoteDevice dev, DeviceClass devclass) {
 		String name = null;
 		try {
-			name = dev.getFriendlyName(true);
-			devices.addElement(dev);
+			// NOKIA does not like active name scanning
+			name = dev.getFriendlyName(false);
+			synchronized (devices) {
+				devices.addElement(dev);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,10 +91,9 @@ public class BTDeviceList extends List implements DiscoveryListener, CommandList
 	}
 
 	public void commandAction(Command cmd, Displayable d) {
-		boolean success = false;
 		RemoteDevice dev = null;
-		this.removeCommand(okCommand);
 		if (cmd == okCommand) {
+			this.removeCommand(okCommand);
 			if (getSelectedIndex() >= 0) {
 				dev = (RemoteDevice) devices.elementAt(this.getSelectedIndex());
 				
@@ -94,14 +104,16 @@ public class BTDeviceList extends List implements DiscoveryListener, CommandList
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				success = true;
 			}
 		} else if (cmd == cancelCommand) {
+			listener.DeviceSelectionFinished(false, null, "");
+		} else if (cmd == refreshCommand) {
+			try {
+				refresh();
+			} catch (BluetoothStateException e) {
+				e.printStackTrace();
+			}
 		}
 		
-		if (! success) {
-			listener.DeviceSelectionFinished(false, null, "");
-		}
 	}
 }
