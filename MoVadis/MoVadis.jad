@@ -1,8 +1,8 @@
 MIDlet-Version: 0.0.1
-MIDlet-Icon: res/gpyes.png
+MIDlet-Icon: res/movadis-small.png
 MIDlet-Vendor: Stefan Tomanek
 MIDlet-Jar-URL: MoVadis.jar
 MicroEdition-Configuration: CLDC-1.0
 MicroEdition-Profile: MIDP-1.0
-MIDlet-1: MoVadis,res/movadis.png,gui.MoVadis
+MIDlet-1: MoVadis,res/movadis-small.png,gui.MoVadis
 MIDlet-Name: MoVadis
