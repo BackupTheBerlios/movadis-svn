@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docbase="/home/stefan/eclipse/MoVadis"
+   sodipodi:docname="MoVadis.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient7491">
+      <stop
+         style="stop-color:#2900ff;stop-opacity:0.22173913;"
+         offset="0"
+         id="stop7493" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="1"
+         id="stop7495" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7491"
+       id="radialGradient13679"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.280398,1.182748,-0.897434,1.730285,17.17811,192.6881)"
+       spreadMethod="pad"
+       cx="-20.739189"
+       cy="124.63921"
+       fx="-20.739189"
+       fy="124.63921"
+       r="75" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7491"
+       id="radialGradient13693"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.776156,2.448814,-1.858078,0.588915,816.2227,313.9718)"
+       spreadMethod="pad"
+       cx="-110.68576"
+       cy="445.70261"
+       fx="-110.68576"
+       fy="445.70261"
+       r="75" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="158.19534"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="g13685"
+     inkscape:window-width="1400"
+     inkscape:window-height="1035"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g13645"
+       transform="matrix(0.707107,0.707107,-0.707107,0.707107,466.6817,-193.5393)"
+       inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         style="opacity:1;fill:#757474;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect2182"
+         width="233.44411"
+         height="438.40604"
+         x="356.24136"
+         y="242.362"
+         rx="15.152288"
+         ry="15.152288" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         ry="15.152288"
+         rx="15.152288"
+         y="252.362"
+         x="344.24136"
+         height="438.40604"
+         width="233.44411"
+         id="rect1307"
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         ry="15.152293"
+         rx="15.152289"
+         y="276.84106"
+         x="365.12265"
+         height="186.32628"
+         width="191.68152"
+         id="rect3057"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.72467804;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         transform="translate(330.3199,124.0254)"
+         id="g4829">
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect3932"
+           width="62.629459"
+           height="30.304577"
+           x="40.406101"
+           y="425.05746"
+           rx="6.0609164"
+           ry="6.0609164" />
+        <rect
+           ry="6.0609164"
+           rx="6.0609164"
+           y="425.05746"
+           x="102.4061"
+           height="30.304577"
+           width="62.629459"
+           id="rect4807"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4809"
+           width="62.629459"
+           height="30.304577"
+           x="164.4061"
+           y="425.05746"
+           rx="6.0609164"
+           ry="6.0609164" />
+        <rect
+           ry="6.0609164"
+           rx="6.0609164"
+           y="455.05746"
+           x="40.406101"
+           height="30.304577"
+           width="62.629459"
+           id="rect4811"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4813"
+           width="62.629459"
+           height="30.304577"
+           x="102.4061"
+           y="455.05746"
+           rx="6.0609164"
+           ry="6.0609164" />
+        <rect
+           ry="6.0609164"
+           rx="6.0609164"
+           y="455.05746"
+           x="164.4061"
+           height="30.304577"
+           width="62.629459"
+           id="rect4815"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           ry="6.0609164"
+           rx="6.0609164"
+           y="485.05746"
+           x="40.406101"
+           height="30.304577"
+           width="62.629459"
+           id="rect4817"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4819"
+           width="62.629459"
+           height="30.304577"
+           x="102.4061"
+           y="485.05746"
+           rx="6.0609164"
+           ry="6.0609164" />
+        <rect
+           ry="6.0609164"
+           rx="6.0609164"
+           y="485.05746"
+           x="164.4061"
+           height="30.304577"
+           width="62.629459"
+           id="rect4821"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4823"
+           width="62.629459"
+           height="30.304577"
+           x="40.406101"
+           y="515.0575"
+           rx="6.0609164"
+           ry="6.0609164" />
+        <rect
+           ry="6.0609164"
+           rx="6.0609164"
+           y="515.0575"
+           x="102.4061"
+           height="30.304577"
+           width="62.629459"
+           id="rect4825"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4827"
+           width="62.629459"
+           height="30.304577"
+           x="164.4061"
+           y="515.0575"
+           rx="6.0609164"
+           ry="6.0609164" />
+        <g
+           transform="translate(5.384623,0)"
+           id="g6603">
+          <rect
+             ry="6.0609164"
+             rx="6.0609164"
+             y="343.23508"
+             x="31.94416"
+             height="30.304577"
+             width="62.629459"
+             id="rect6593"
+             style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+          <rect
+             style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             id="rect6595"
+             width="62.629459"
+             height="30.304577"
+             x="93.94416"
+             y="343.23508"
+             rx="6.0609164"
+             ry="6.0609164" />
+          <rect
+             ry="6.0609164"
+             rx="6.0609164"
+             y="343.23508"
+             x="155.94417"
+             height="30.304577"
+             width="62.629459"
+             id="rect6597"
+             style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+          <g
+             transform="translate(-1.499998,0)"
+             id="g6612">
+            <rect
+               ry="6.0609169"
+               rx="6.0609169"
+               y="387.86563"
+               x="70.276184"
+               height="21.04347"
+               width="28.24872"
+               id="rect6608"
+               style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.67894268;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+            <rect
+               style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.67894268;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+               id="rect6610"
+               width="28.24872"
+               height="21.04347"
+               x="154.99287"
+               y="387.86563"
+               rx="6.0609169"
+               ry="6.0609169" />
+          </g>
+        </g>
+      </g>
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         transform="translate(1.219467e-4,38)"
+         id="g6599">
+        <path
+           sodipodi:type="arc"
+           style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.072;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+           id="path4843"
+           sodipodi:cx="471.74124"
+           sodipodi:cy="485.6666"
+           sodipodi:rx="18.182745"
+           sodipodi:ry="18.182745"
+           d="M 489.92399 485.6666 A 18.182745 18.182745 0 1 1  453.5585,485.6666 A 18.182745 18.182745 0 1 1  489.92399 485.6666 z"
+           transform="matrix(1.263297,0,0,1.263297,-134.986,-127.8746)" />
+        <path
+           transform="matrix(0.631384,0,0,0.631384,163.1135,179.0246)"
+           d="M 489.92399 485.6666 A 18.182745 18.182745 0 1 1  453.5585,485.6666 A 18.182745 18.182745 0 1 1  489.92399 485.6666 z"
+           sodipodi:ry="18.182745"
+           sodipodi:rx="18.182745"
+           sodipodi:cy="485.6666"
+           sodipodi:cx="471.74124"
+           id="path4845"
+           style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.75146675;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.072;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+           sodipodi:type="arc" />
+      </g>
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         transform="matrix(1.179134,0,0,1.179134,489.9987,-54.06204)"
+         d="M 51 362.36218 A 74 74 0 1 1  -97,362.36218 A 74 74 0 1 1  51 362.36218 z"
+         sodipodi:ry="74"
+         sodipodi:rx="74"
+         sodipodi:cy="362.36218"
+         sodipodi:cx="-23"
+         id="path10133"
+         style="opacity:1;color:#000000;fill:url(#radialGradient13679);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.69616044;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.072;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         sodipodi:type="arc" />
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         transform="translate(301.5858,-150.6569)"
+         id="g11889">
+        <g
+           transform="translate(46,33)"
+           id="g12767">
+          <path
+             transform="translate(467,136.5)"
+             d="M -315 339.36218 A 20 20 0 1 1  -355,339.36218 A 20 20 0 1 1  -315 339.36218 z"
+             sodipodi:ry="20"
+             sodipodi:rx="20"
+             sodipodi:cy="339.36218"
+             sodipodi:cx="-335"
+             id="path7499"
+             style="opacity:1;color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.072;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+             sodipodi:type="arc" />
+          <path
+             id="path7501"
+             d="M 132.00002,408.91372 L 132.00002,542.81064"
+             style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#ff0000;stroke-width:3.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#ff0000;stroke-width:3.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 198.94848,475.86218 L 65.05155,475.86218"
+             id="path9258" />
+        </g>
+      </g>
+      <path
+         sodipodi:type="arc"
+         style="opacity:1;color:#000000;fill:url(#radialGradient13693);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.69616044;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.072;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         id="path13681"
+         sodipodi:cx="-23"
+         sodipodi:cy="362.36218"
+         sodipodi:rx="74"
+         sodipodi:ry="74"
+         d="M 51 362.36218 A 74 74 0 1 1  -97,362.36218 A 74 74 0 1 1  51 362.36218 z"
+         transform="matrix(0.833774,-0.833774,0.833774,0.833774,-432.0724,591.9066)"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis-small.png"
+         inkscape:export-xdpi="13.24"
+         inkscape:export-ydpi="13.24" />
+      <g
+         id="g13683"
+         transform="matrix(0.823983,-0.823983,0.823983,0.823983,-703.9819,598.8068)"
+         inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <g
+           id="g13685"
+           transform="translate(46,33)">
+          <path
+             sodipodi:type="arc"
+             style="opacity:1;color:#000000;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0000;stroke-width:3.36868119;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.072;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+             id="path13687"
+             sodipodi:cx="-335"
+             sodipodi:cy="339.36218"
+             sodipodi:rx="20"
+             sodipodi:ry="20"
+             d="M -315 339.36218 A 20 20 0 1 1  -355,339.36218 A 20 20 0 1 1  -315 339.36218 z"
+             transform="matrix(1.273728,0,0,1.273728,550.1173,41.89075)"
+             inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis-small.png"
+             inkscape:export-xdpi="13.24"
+             inkscape:export-ydpi="13.24" />
+          <path
+             style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#ff0000;stroke-width:4.29078293;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 123.4184,388.87165 L 123.4184,559.41987"
+             id="path13689"
+             inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis-small.png"
+             inkscape:export-xdpi="13.24"
+             inkscape:export-ydpi="13.24" />
+          <path
+             id="path13691"
+             d="M 208.69251,474.14576 L 38.144291,474.14576"
+             style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#ff0000;stroke-width:4.29078293;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             inkscape:export-filename="/home/stefan/eclipse/MoVadis/movadis-small.png"
+             inkscape:export-xdpi="13.24"
+             inkscape:export-ydpi="13.24" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
