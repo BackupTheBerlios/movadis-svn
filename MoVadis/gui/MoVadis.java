@@ -4,14 +4,16 @@
  */
 package gui;
 
-import java.io.IOException;
-
 import gps.DeviceSelectionListener;
 import gps.GPSConnection;
-import gps.GPSData;
-import gps.GPSDataReceivedListener;
 import gps.GPSDecoder;
-import gps.SentenceListener;
+import gps.GPSReceiver;
+import gps.NMEASimulator;
+import gps.Position;
+import gps.Position.LatitudeDirection;
+import gps.Position.LongitudeDirection;
+
+import java.io.IOException;
 
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.RemoteDevice;
@@ -30,10 +32,11 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 	private PositionScreen pos;
 	
 	private GPSDecoder dec;
-	private GPSConnection con;
+	private GPSReceiver con;
 	
 	private static Command exitCommand = new Command("Exit", Command.EXIT, 0);
 	private static Command connectCommand = new Command("Connect", Command.SCREEN, 0);
+	private static Command simCommand = new Command("Simulate", Command.SCREEN, 0);
 	
 	public MoVadis() {
 		con = null;
@@ -42,6 +45,7 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 		pos = new PositionScreen(disp);
 		pos.addCommand(exitCommand);
 		pos.addCommand(connectCommand);
+		pos.addCommand(simCommand);
 		
 		pos.setCommandListener(this);
 		
@@ -84,22 +88,36 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 				e.printStackTrace();
 			}
 			disp.setCurrent(l);
+		} else if (cmd == simCommand) {
+			setDataSource(new NMEASimulator(new Position(0,0,LatitudeDirection.NORTH,0,0,LongitudeDirection.EAST)));
+			Alert a = new Alert("Simulation!");
+			disp.setCurrent(a, pos);
 		}
 	}
-
+	
+	private void setDataSource(GPSReceiver rcv) {
+		if (con != null) {
+			try {
+				con.stop();
+			} catch (IOException e) {}
+		}
+		
+		con = rcv;
+		con.addSentenceListener(pos);
+		con.addSentenceListener(dec);
+		
+		try {
+			con.start();
+		} catch (IOException e) {
+			Alert a = new Alert("Connection error", "Unable to connect device.", null, AlertType.ERROR);
+			a.setTimeout(Alert.FOREVER);
+			disp.setCurrent(a, pos);
+		}		
+	}
+	
 	public void DeviceSelectionFinished(boolean success, RemoteDevice dev, String url) {
 		if (success) {
-			con = new GPSConnection(url);
-			con.addSentenceListener(pos);
-			con.addSentenceListener(dec);
-			
-			try {
-				con.start();
-			} catch (IOException e) {
-				Alert a = new Alert("Connection error", "Unable to connect device at "+url+".", null, AlertType.ERROR);
-				a.setTimeout(Alert.FOREVER);
-				disp.setCurrent(a, pos);
-			}
+			setDataSource(new GPSConnection(url));
 			disp.setCurrent(pos);
 		} else {
 			Alert a = new Alert("Abort", "No device selected.", null, AlertType.ERROR);

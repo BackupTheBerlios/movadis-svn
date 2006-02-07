@@ -4,6 +4,9 @@
  */
 package gps;
 
+import gps.Position.LatitudeDirection;
+import gps.Position.LongitudeDirection;
+
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -50,7 +53,17 @@ public class GPSDecoder implements SentenceListener {
 			int sats = Integer.parseInt( (String)strings.elementAt(7) );
 			
 			if (!(lat.equals("")||lon.equals(""))) {
-				Position p = new Position(Double.parseDouble(lat)/100, Double.parseDouble(lon)/100);
+				int degLat = Integer.parseInt(lat.substring(0,2));
+				float mLat = Float.parseFloat(lat.substring(2,9));
+				int degLon = Integer.parseInt(lon.substring(0,3));
+				float mLon = Float.parseFloat(lon.substring(3,10));
+				
+				String latIn = (String)strings.elementAt(3);
+				String lonIn = (String)strings.elementAt(5);
+				LatitudeDirection latDir = latIn.equals("N") ? LatitudeDirection.NORTH : LatitudeDirection.SOUTH;
+				LongitudeDirection lonDir = lonIn.equals("E") ? LongitudeDirection.EAST : LongitudeDirection.WEST;
+				
+				Position p = new Position(degLat, mLat, latDir, degLon, mLon, lonDir);
 				GPSLockType gl = GPSLockType.parseType(fixType);
 				GPSData gd = new GPSData(p, gl, sats);
 				informListeners(gd);

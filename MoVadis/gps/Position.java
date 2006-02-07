@@ -7,27 +7,84 @@ package gps;
 // import java.util.Date;
 
 public class Position {
-	private double lat;
-	private double lon;
-	// private Date date;
+	private int degLon;
+	private int degLat;
 	
-	public Position(double lat, double lon) {
-		this.lat = lat;
-		this.lon = lon;
-		// this.date = date;
+	private float minLon;
+	private float minLat;
+	private LongitudeDirection loDir;
+	private LatitudeDirection laDir;
+	
+	public abstract static class GeoDirection {
+		private char dir;
+		protected GeoDirection(char c) {
+			this.dir = c;
+		}
+		public String toString() {
+			return ""+dir;
+		}
+	}
+	public static final class LongitudeDirection extends GeoDirection {
+		public static final LongitudeDirection WEST = new LongitudeDirection('W');
+		public static final LongitudeDirection EAST = new LongitudeDirection('E');		
+		
+		private LongitudeDirection(char c) {
+			super(c);
+		}
 	}
 
-	public double getLat() {
-		return lat;
-	}
-
-	public double getLon() {
-		return lon;
+	public static final class LatitudeDirection extends GeoDirection {
+		public static final LatitudeDirection NORTH = new LatitudeDirection('N');
+		public static final LatitudeDirection SOUTH = new LatitudeDirection('S');
+		
+		private LatitudeDirection(char c) {
+			super(c);
+		}
 	}
 	
-	/*
-	public Date getDate() {
-		return date;
+	public Position(int degLat, float minLat, LatitudeDirection laDir, int degLon, float minLon, LongitudeDirection loDir) {
+		this.degLon = degLon;
+		this.minLon = minLon;
+		this.loDir = loDir;
+		this.degLat = degLat;
+		this.minLat = minLat;
+		this.laDir = laDir;
 	}
-	*/
+
+	public String getLatitudeAsString() {
+		return degLat+"° "+minLat+"' "+laDir;
+	}
+
+	public String getLongitudeAsString() {
+		return degLon+"° "+minLon+"'"+loDir;
+	}
+	
+	public String toString() {
+		return getLatitudeAsString()+"/"+getLongitudeAsString();
+	}
+	
+	protected static float toDecimal(int deg, float min) {
+		float result = 0;
+		result += deg;
+		result += min/60;
+		return result;
+	}
+	
+	public double distanceTo(Position p) {
+		// not exact, but should be enough
+		// distance in km = arccos(sin(a) * sin(c) + cos(a) * cos(c) * cos(min(b-d,360-(b-d)))) * 111
+		double result = 0;
+		float a = toDecimal(this.degLat, this.minLat);
+		if (this.laDir == LatitudeDirection.SOUTH) a *= -1;
+		float b = toDecimal(this.degLon, this.minLon);
+		if (this.loDir == LongitudeDirection.EAST) b *= -1;
+		
+		// TODO Implement metods for coordinate retrieval
+		float c = 0;
+		float d = 0;
+		
+		// Great, there is no acos(...) in J2ME 
+		
+		return result;
+	}
 }

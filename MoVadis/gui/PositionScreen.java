@@ -17,8 +17,6 @@ import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.StringItem;
 
 public class PositionScreen extends Form implements SentenceListener, GPSDataReceivedListener {
-	private static int displayPrecision = 5;
-	
 	private StringItem lat;
 	private StringItem lon;
 	private StringItem info;
@@ -50,24 +48,15 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		this.append(info);
 	}
 	
-	private String shorten(double x) {
-		String xs = x+"";
-		// where is the .?
-		int dotpos = xs.indexOf(".");
-		
-		return xs.substring(0, dotpos+displayPrecision);
-	}
-	
 	public void SentenceReceived(String sentence) {
 		this.info.setText(sentence);
 	}
 	
 	public void GPSDataReceived(GPSData gd) {
-		//Alert a = new Alert("posotion changed", p.getLat()+"/"+p.getLon(), null, AlertType.INFO);
-		//disp.setCurrent(a, this);
 		Position p = gd.getPosition();
-		lat.setText(shorten(p.getLat())+"°N");
-		lon.setText(shorten(p.getLon())+"°E");
+		
+		lat.setText(p.getLatitudeAsString());
+		lon.setText(p.getLongitudeAsString());
 		
 		sat.setText(gd.getNumberOfSatellites()+"");
 		

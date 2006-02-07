@@ -106,6 +106,7 @@ public class BTDeviceList extends List implements DiscoveryListener, CommandList
 				}
 			}
 		} else if (cmd == cancelCommand) {
+			da.cancelInquiry(this);
 			listener.DeviceSelectionFinished(false, null, "");
 		} else if (cmd == refreshCommand) {
 			try {
