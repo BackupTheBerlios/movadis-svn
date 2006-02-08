@@ -4,11 +4,6 @@
  */
 package gps;
 
-import javax.microedition.m3g.Graphics3D;
-import javax.microedition.m3g.Transform;
-
-// import java.util.Date;
-
 public class Position {
 	private int degLon;
 	private int degLat;
