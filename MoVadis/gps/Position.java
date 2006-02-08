@@ -89,7 +89,6 @@ public class Position {
 		float a = getLatitudeAsFloat();
 		float b = getLongitudeAsFloat();
 		
-		// TODO Implement metods for coordinate retrieval
 		float c = p.getLatitudeAsFloat();
 		float d = p.getLongitudeAsFloat();
 		
