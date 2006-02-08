@@ -93,6 +93,7 @@ public class BTDeviceList extends List implements DiscoveryListener, CommandList
 	public void commandAction(Command cmd, Displayable d) {
 		RemoteDevice dev = null;
 		if (cmd == okCommand) {
+			da.cancelInquiry(this);
 			this.removeCommand(okCommand);
 			if (getSelectedIndex() >= 0) {
 				dev = (RemoteDevice) devices.elementAt(this.getSelectedIndex());

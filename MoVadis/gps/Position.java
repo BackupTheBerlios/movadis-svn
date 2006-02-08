@@ -4,6 +4,9 @@
  */
 package gps;
 
+import javax.microedition.m3g.Graphics3D;
+import javax.microedition.m3g.Transform;
+
 // import java.util.Date;
 
 public class Position {
@@ -24,6 +27,7 @@ public class Position {
 			return ""+dir;
 		}
 	}
+	
 	public static final class LongitudeDirection extends GeoDirection {
 		public static final LongitudeDirection WEST = new LongitudeDirection('W');
 		public static final LongitudeDirection EAST = new LongitudeDirection('E');		
@@ -70,20 +74,27 @@ public class Position {
 		return result;
 	}
 	
+	public float getLatitudeAsFloat() {
+		return toDecimal(this.degLat, this.minLat) * (this.laDir == LatitudeDirection.SOUTH ? -1 : 1); 
+	}
+	
+	public float getLongitudeAsFloat() {
+		return toDecimal(this.degLon, this.minLon) * (this.loDir == LongitudeDirection.EAST ? -1 : 1); 
+	}
+	
 	public double distanceTo(Position p) {
 		// not exact, but should be enough
 		// distance in km = arccos(sin(a) * sin(c) + cos(a) * cos(c) * cos(min(b-d,360-(b-d)))) * 111
 		double result = 0;
-		float a = toDecimal(this.degLat, this.minLat);
-		if (this.laDir == LatitudeDirection.SOUTH) a *= -1;
-		float b = toDecimal(this.degLon, this.minLon);
-		if (this.loDir == LongitudeDirection.EAST) b *= -1;
+		float a = getLatitudeAsFloat();
+		float b = getLongitudeAsFloat();
 		
 		// TODO Implement metods for coordinate retrieval
-		float c = 0;
-		float d = 0;
+		float c = p.getLatitudeAsFloat();
+		float d = p.getLongitudeAsFloat();
 		
 		// Great, there is no acos(...) in J2ME 
+		// TODO Implement a real calculation
 		
 		return result;
 	}
