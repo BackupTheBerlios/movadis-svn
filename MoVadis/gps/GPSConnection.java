@@ -4,8 +4,8 @@
  */
 package gps;
 
-
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
@@ -16,20 +16,20 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 	private boolean reading;
 	
 	private Thread readThread;
-	private InputStreamReader reader;	
+	private InputStreamReader reader;
+	private InputStream is;
 	
 	public GPSConnection(String url) {
 		super();
-		
 		this.url = url;
-		
-		reading = true;
+		reading = false;
 	}
 	
 	public void start() throws IOException {
-		con = ((StreamConnection) Connector.open(url, Connector.READ));
+		reading = true;
 		
-		reader = new InputStreamReader(con.openInputStream());
+		con = ((StreamConnection) Connector.open(url));
+		is = con.openInputStream();
 		
 		readThread = new Thread(this);
 		readThread.start();		
@@ -44,7 +44,7 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 		StringBuffer r = new StringBuffer();
 		int input;
 		// 13 == carriage return
-        while ((input = reader.read()) != 13) {
+        while ((input = is.read()) != 13) {
         	r.append((char)input);
         }
         return r.toString().substring(1, r.length());
@@ -54,10 +54,14 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 		return readLine();
 	}
 	
-	private void read() throws IOException {
+	private void read() {
 		while (reading) {
-			String sentence = readSentence();
-			informListeners(sentence);
+			try {
+				String sentence = readSentence();
+				informListeners(sentence);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -71,8 +75,6 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 		reading = true;
 		try {
 			read();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} finally {
 			close();
 		}

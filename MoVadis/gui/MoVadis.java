@@ -10,8 +10,6 @@ import gps.GPSDecoder;
 import gps.GPSReceiver;
 import gps.NMEASimulator;
 import gps.Position;
-import gps.Position.LatitudeDirection;
-import gps.Position.LongitudeDirection;
 
 import java.io.IOException;
 
@@ -25,6 +23,7 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
+
 
 public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionListener {
 	private Display disp;
@@ -89,7 +88,7 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 			}
 			disp.setCurrent(l);
 		} else if (cmd == simCommand) {
-			setDataSource(new NMEASimulator(new Position(0,0,LatitudeDirection.NORTH,0,0,LongitudeDirection.EAST)));
+			setDataSource(new NMEASimulator(new Position(51.231569f, -6.5f)));
 			Alert a = new Alert("Simulation!");
 			disp.setCurrent(a, pos);
 		}

@@ -42,6 +42,7 @@ public class Position {
 	}
 	
 	public Position(int degLat, float minLat, LatitudeDirection laDir, int degLon, float minLon, LongitudeDirection loDir) {
+		// TODO Handle overflow in any direction
 		this.degLon = degLon;
 		this.minLon = minLon;
 		this.loDir = loDir;
@@ -49,13 +50,17 @@ public class Position {
 		this.minLat = minLat;
 		this.laDir = laDir;
 	}
-
+	
+	public Position(float latitude, float longitude) {
+		this(Math.abs((int)latitude), Math.abs((latitude-(int)latitude)*60), latitude > 0 ? LatitudeDirection.NORTH : LatitudeDirection.SOUTH, Math.abs((int)longitude), Math.abs(((longitude-(int)longitude))*60), longitude > 0 ? LongitudeDirection.WEST : LongitudeDirection.EAST);
+	}
+	
 	public String getLatitudeAsString() {
 		return degLat+"° "+minLat+"' "+laDir;
 	}
 
 	public String getLongitudeAsString() {
-		return degLon+"° "+minLon+"'"+loDir;
+		return degLon+"° "+minLon+"' "+loDir;
 	}
 	
 	public String toString() {
@@ -77,19 +82,41 @@ public class Position {
 		return toDecimal(this.degLon, this.minLon) * (this.loDir == LongitudeDirection.EAST ? -1 : 1); 
 	}
 	
-	public double distanceTo(Position p) {
-		// not exact, but should be enough
-		// distance in km = arccos(sin(a) * sin(c) + cos(a) * cos(c) * cos(min(b-d,360-(b-d)))) * 111
-		double result = 0;
-		float a = getLatitudeAsFloat();
-		float b = getLongitudeAsFloat();
-		
-		float c = p.getLatitudeAsFloat();
-		float d = p.getLongitudeAsFloat();
-		
-		// Great, there is no acos(...) in J2ME 
-		// TODO Implement a real calculation
-		
+	private static double pow(double a, int b) {
+		double result = 1;
+		while (b-- > 0) {
+			result *= a;
+		}
 		return result;
 	}
+	
+	public double distanceTo(Position p) {
+		double result = 0;
+		
+		double lat1 = getLatitudeAsFloat();
+		double lon1 = getLongitudeAsFloat();
+		
+		double lat2 = p.getLatitudeAsFloat();
+		double lon2 = p.getLongitudeAsFloat();
+		
+		// TODO Implement a proper calculation
+		// -> d=2*asin(sqrt((sin((lat1-lat2)/2))^2 + cos(lat1)*cos(lat2)*(sin((lon1-lon2)/2))^2))
+		
+		//double root = pow( pow(Math.sin((lat1-lat2)/2),2) + Math.cos(lat1)*Math.cos(lat2)*(Math.sin((lon1-lon2)/2)) ,2);
+		//result = 2*Trigonometry.asin(Math.toRadians(Math.sqrt(root)));
+		
+		//		L1  =  	latitude at the first point (degrees)
+		//		L2 	= 	latitude at the second point (degrees)
+		//		G1 	= 	longitude at the first point (degrees)
+		//		G2 	= 	longitude at the second point (degrees)
+		//		DG 	= 	longitude of the second point minus longitude of the first point (degrees)
+		//		DL 	= 	latitude of the second point minus latitude of the first point (degrees)
+		//		D 	= 	computed distance (km)
+		// 1 minute of arc is 1 nautical mile
+		// 1 nautical mile is 1.852 km
+		// D = 1.852 * 60 * ARCOS ( SIN(L1) * SIN(L2) + COS(L1) * COS(L2) * COS(DG))
+
+		return result;		
+	}
+	
 }

@@ -35,8 +35,8 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		ImageItem iitem = new ImageItem("Position", img, ImageItem.LAYOUT_LEFT | ImageItem.LAYOUT_TOP | ImageItem.PLAIN, "");
 		this.append(iitem);
 		
-		lat = new StringItem("Latitude: ", "?");
-		lon = new StringItem("Longitude: ", "?");
+		lat = new StringItem("Lat: ", "?");
+		lon = new StringItem("Lon: ", "?");
 		sat = new StringItem("Satellites: ", "?");
 		fix = new StringItem("Fix: ", "None");
 		info = new StringItem("Info: ", "...");
