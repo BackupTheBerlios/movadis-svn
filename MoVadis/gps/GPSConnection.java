@@ -19,10 +19,13 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 	private InputStreamReader reader;
 	private InputStream is;
 	
+	private BTBuffer buffer;
+	
 	public GPSConnection(String url) {
 		super();
 		this.url = url;
 		reading = false;
+		buffer = new BTBuffer();
 	}
 	
 	public void start() throws IOException {
@@ -40,25 +43,27 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 		close();
 	}
 	
-	private synchronized String readLine() throws IOException {
-		StringBuffer r = new StringBuffer();
-		int input;
-		// 13 == carriage return
-        while ((input = is.read()) != 13) {
-        	r.append((char)input);
-        }
-        return r.toString().substring(1, r.length());
-	}
 	
-	private synchronized String readSentence() throws IOException {
-		return readLine();
+	private synchronized void fillBuffer() throws IOException {
+		while (! buffer.hasSentence()) {
+			// We have to read as much as possible
+			byte[] input = new byte[is.available()];
+			is.read(input);
+			buffer.addData(input);
+		}
 	}
 	
 	private void read() {
 		while (reading) {
 			try {
-				String sentence = readSentence();
-				informListeners(sentence);
+				// Make sure we have at least one complete sentence 
+				fillBuffer();
+				// propagate all received sentences to our listeners
+				while (buffer.hasSentence()) {
+					// fetch the next NMEA sentence, inform listeners,
+					// and remove the String it from buffer
+					informListeners(buffer.getNextSentence());
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
