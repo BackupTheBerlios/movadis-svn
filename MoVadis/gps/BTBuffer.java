@@ -12,23 +12,32 @@ public class BTBuffer {
 	}
 	
 	public void addData(byte[] input) {
-		for (int i=0; i<input.length; i++) {
-			buffer.append((char) input[i]);	
+		synchronized (buffer) {
+			for (int i=0; i<input.length; i++) {
+				buffer.append((char) input[i]);	
+			}
 		}
 	}
 	
 	public boolean hasSentence() {
-		return buffer.toString().indexOf(13) >= 0;
+		synchronized (buffer) {
+			// Sentences are closed by two characters, CR (0d/13) and LF (0a/10)
+			int lfi =  buffer.toString().indexOf(13);
+			int cri =  buffer.toString().indexOf(10);
+			// Both characters (line feed and carriage return) are present and in order
+			return (lfi >= 0 && cri >= 0) && (lfi == cri+1);
+		}
 	}
 	
 	public String getNextSentence() {
-		// Find the first newline in the buffer (it closes a sentence)
-		int i = buffer.toString().indexOf(13);
-		// The first character is a CR, we skip it since it confuses
-		// our parsers (we like Unix style newlines)
-		String sentence = buffer.toString().substring(1, i);
-		// i+1, since we have to delete the newline as well
-		buffer.delete(0,i+1);
-		return sentence;
+		synchronized (buffer) {
+			// Find the first carriage return in the buffer (it closes a sentence)
+			int i = buffer.toString().indexOf(10);
+			// NMEA closes sentences with CR-LF, so we exclude both characters from the result
+			String sentence = buffer.toString().substring(0, i-1);
+			// delete the retrieved data from the buffer
+			buffer.delete(0,i);
+			return sentence;
+		}
 	}
 }

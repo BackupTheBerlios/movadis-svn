@@ -11,6 +11,8 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 
 public class GPSConnection extends GPSReceiver implements Runnable {
+	private static long READ_INTERVAL = 100;
+	
 	private StreamConnection con;
 	private String url;
 	private boolean reading;
@@ -44,7 +46,7 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 	}
 	
 	
-	private synchronized void fillBuffer() throws IOException {
+	private void fillBuffer() throws IOException {
 		while (! buffer.hasSentence()) {
 			// We have to read as much as possible
 			byte[] input = new byte[is.available()];
@@ -65,6 +67,11 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 					informListeners(buffer.getNextSentence());
 				}
 			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(READ_INTERVAL);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

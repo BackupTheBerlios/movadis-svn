@@ -4,12 +4,13 @@
  */
 package gps;
 
+
 public class Position {
 	private int degLon;
 	private int degLat;
 	
-	private float minLon;
-	private float minLat;
+	private double minLon;
+	private double minLat;
 	private LongitudeDirection loDir;
 	private LatitudeDirection laDir;
 	
@@ -41,7 +42,7 @@ public class Position {
 		}
 	}
 	
-	public Position(int degLat, float minLat, LatitudeDirection laDir, int degLon, float minLon, LongitudeDirection loDir) {
+	public Position(int degLat, double minLat, LatitudeDirection laDir, int degLon, double minLon, LongitudeDirection loDir) {
 		// TODO Handle overflow in any direction
 		this.degLon = degLon;
 		this.minLon = minLon;
@@ -51,7 +52,7 @@ public class Position {
 		this.laDir = laDir;
 	}
 	
-	public Position(float latitude, float longitude) {
+	public Position(double latitude, double longitude) {
 		this(Math.abs((int)latitude), Math.abs((latitude-(int)latitude)*60), latitude > 0 ? LatitudeDirection.NORTH : LatitudeDirection.SOUTH, Math.abs((int)longitude), Math.abs(((longitude-(int)longitude))*60), longitude > 0 ? LongitudeDirection.WEST : LongitudeDirection.EAST);
 	}
 	
@@ -67,37 +68,29 @@ public class Position {
 		return getLatitudeAsString()+"/"+getLongitudeAsString();
 	}
 	
-	protected static float toDecimal(int deg, float min) {
-		float result = 0;
+	protected static double toDecimal(int deg, double min) {
+		double result = 0;
 		result += deg;
 		result += min/60;
 		return result;
 	}
 	
-	public float getLatitudeAsFloat() {
+	public double getLatitudeAsDecimal() {
 		return toDecimal(this.degLat, this.minLat) * (this.laDir == LatitudeDirection.SOUTH ? -1 : 1); 
 	}
 	
-	public float getLongitudeAsFloat() {
+	public double getLongitudeAsDecimal() {
 		return toDecimal(this.degLon, this.minLon) * (this.loDir == LongitudeDirection.EAST ? -1 : 1); 
-	}
-	
-	private static double pow(double a, int b) {
-		double result = 1;
-		while (b-- > 0) {
-			result *= a;
-		}
-		return result;
 	}
 	
 	public double distanceTo(Position p) {
 		double result = 0;
 		
-		double lat1 = getLatitudeAsFloat();
-		double lon1 = getLongitudeAsFloat();
+		double lat1 = getLatitudeAsDecimal();
+		double lon1 = getLongitudeAsDecimal();
 		
-		double lat2 = p.getLatitudeAsFloat();
-		double lon2 = p.getLongitudeAsFloat();
+		double lat2 = p.getLatitudeAsDecimal();
+		double lon2 = p.getLongitudeAsDecimal();
 		
 		// TODO Implement a proper calculation
 		// -> d=2*asin(sqrt((sin((lat1-lat2)/2))^2 + cos(lat1)*cos(lat2)*(sin((lon1-lon2)/2))^2))
@@ -115,8 +108,35 @@ public class Position {
 		// 1 minute of arc is 1 nautical mile
 		// 1 nautical mile is 1.852 km
 		// D = 1.852 * 60 * ARCOS ( SIN(L1) * SIN(L2) + COS(L1) * COS(L2) * COS(DG))
-
+		
+		//double t = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2-lon1);
+		//double distance = 1.852 * 60 * Float11.acos(t);
+		
+		//result = distance;
+		
+		// Let's assume the earth is a flat surface
+		
+		double latd = (lat2-lat1)*40000/360;
+		double lond = Math.cos((lat1+lat2)/2)*(lon2-lon1)*40000/360;
+		
+		double distance = Math.sqrt(latd*latd + lond*lond);
+		
+		result = distance;
+		
 		return result;		
+	}
+	
+	public String freeze() {
+		return getLatitudeAsDecimal()+"/"+getLongitudeAsDecimal();
+	}
+	
+	public static Position thaw(String data) {
+		int i = data.indexOf('/');
+		String lat = data.substring(0, i);
+		String lon = data.substring(i+1, data.length());
+		double flat = Double.parseDouble(lat);
+		double flon = Double.parseDouble(lon);
+		return new Position(flat, flon);
 	}
 	
 }

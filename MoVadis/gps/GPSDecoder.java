@@ -7,6 +7,8 @@ package gps;
 import gps.Position.LatitudeDirection;
 import gps.Position.LongitudeDirection;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -40,7 +42,19 @@ public class GPSDecoder implements SentenceListener {
 		String first = (String)strings.elementAt(0);
 		
 		if (first.equals("$GPGGA")) {
-			//String time = (String)strings.elementAt(1);
+			String time = (String)strings.elementAt(1);
+			int hour = Integer.parseInt(time.substring(0,2));
+			int minutes = Integer.parseInt(time.substring(2,4));
+			int seconds = Integer.parseInt(time.substring(4,6));
+			int mseconds = Integer.parseInt(time.substring(7,10));
+			
+			Calendar c = Calendar.getInstance();
+			c.setTime(new Date(System.currentTimeMillis()));
+			c.set(Calendar.HOUR, hour);
+			c.set(Calendar.MINUTE, minutes);
+			c.set(Calendar.SECOND, seconds);
+			c.set(Calendar.MILLISECOND, mseconds);
+			
 			String lat = (String)strings.elementAt(2);
 			String lon = (String)strings.elementAt(4);
 			/*
@@ -54,9 +68,9 @@ public class GPSDecoder implements SentenceListener {
 			
 			if (!(lat.equals("")||lon.equals(""))) {
 				int degLat = Integer.parseInt(lat.substring(0,2));
-				float mLat = Float.parseFloat(lat.substring(2,9));
+				double mLat = Double.parseDouble(lat.substring(2,9));
 				int degLon = Integer.parseInt(lon.substring(0,3));
-				float mLon = Float.parseFloat(lon.substring(3,10));
+				double mLon = Double.parseDouble(lon.substring(3,10));
 				
 				String latIn = (String)strings.elementAt(3);
 				String lonIn = (String)strings.elementAt(5);
@@ -65,7 +79,7 @@ public class GPSDecoder implements SentenceListener {
 				
 				Position p = new Position(degLat, mLat, latDir, degLon, mLon, lonDir);
 				GPSLockType gl = GPSLockType.parseType(fixType);
-				GPSData gd = new GPSData(p, gl, sats);
+				GPSData gd = new GPSData(p, gl, sats, c);
 				informListeners(gd);
 			}
 		}

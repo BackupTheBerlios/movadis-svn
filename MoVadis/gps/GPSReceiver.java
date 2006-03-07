@@ -37,10 +37,12 @@ public abstract class GPSReceiver {
 	}
 
 	protected void informListeners(String sentence) {
+		System.out.println(sentence);
 		synchronized (listeners) {
 			Enumeration en = listeners.elements();
 			while (en.hasMoreElements()) {
 				try {
+					System.out.println("Informing");
 					// Inform the listener in a seperate thread, so we can get back to reading again
 					// We usually only have 1-2, so this should be OK
 					//((SentenceListener) en.nextElement()).SentenceReceived(sentence);
