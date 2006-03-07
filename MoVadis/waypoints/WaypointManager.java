@@ -8,29 +8,49 @@ import gps.Position;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.microedition.io.Connector;
 import javax.microedition.io.file.FileConnection;
-import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Display;
 
 public class WaypointManager {
 	private static String fileURL = "file:///e:/waypoints";
 	
 	private Vector waypoints;
-
-	private Display disp;
+	private Waypoint currentWaypoint;
+	
+	private Vector eventListeners;
 	
 	public WaypointManager(Display d) {
 		waypoints = new Vector();
-		this.disp = d;
+		eventListeners = new Vector();
+	}
+	
+	public void addWaypointEventListener(WaypointEventListener wpsl) {
+		eventListeners.addElement(wpsl);
+	}
+	
+	protected void informSelectListeners() {
+		Enumeration e = eventListeners.elements();
+		while (e.hasMoreElements()) {
+			WaypointEventListener wpsl = (WaypointEventListener) e.nextElement();
+			wpsl.waypointSelected(currentWaypoint, this);
+		}
+	}
+	
+	protected void informAddListeners(Waypoint added) {
+		Enumeration e = eventListeners.elements();
+		while (e.hasMoreElements()) {
+			WaypointEventListener wpsl = (WaypointEventListener) e.nextElement();
+			wpsl.waypointAdded(added, this);
+		}
 	}
 	
 	public void loadWaypoints() throws IOException {
-		FileConnection fc = (FileConnection)Connector.open(fileURL);
+		FileConnection fc = (FileConnection)Connector.open(fileURL, Connector.READ);
 		InputStream is = fc.openInputStream();
 		
 		StringBuffer buffer = new StringBuffer();
@@ -51,7 +71,7 @@ public class WaypointManager {
 	}
 	
 	public void saveWaypoints() throws IOException {
-		FileConnection fc = (FileConnection)Connector.open(fileURL);
+		FileConnection fc = (FileConnection)Connector.open(fileURL, Connector.WRITE);
 		if (! fc.exists()) {
 			fc.create();
 		}
@@ -71,6 +91,7 @@ public class WaypointManager {
 		synchronized (waypoints) {
 			waypoints.addElement(wp);
 		}
+		informAddListeners(wp);
 	}
 	
 	public void addWaypoint(String name, Position pos) {
@@ -91,6 +112,19 @@ public class WaypointManager {
 	}
 	
 	public void clearWaypoints() {
-		waypoints.removeAllElements();
+		synchronized (waypoints) {
+			waypoints.removeAllElements();
+			currentWaypoint = null;
+			informSelectListeners();
+		}
+	}
+	
+	public void selectWaypoint(Waypoint wp) {
+		currentWaypoint = wp;
+		informSelectListeners();
+	}
+	
+	public Waypoint getCurrentWaypoint() {
+		return currentWaypoint;
 	}
 }

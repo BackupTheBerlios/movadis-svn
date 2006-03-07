@@ -21,14 +21,17 @@ import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.StringItem;
 
 import waypoints.Waypoint;
+import waypoints.WaypointEventListener;
+import waypoints.WaypointManager;
 
-public class PositionScreen extends Form implements SentenceListener, GPSDataReceivedListener {
+public class PositionScreen extends Form implements SentenceListener, GPSDataReceivedListener, WaypointEventListener {
 	private StringItem lat;
 	private StringItem lon;
-	private StringItem time;
+	// private StringItem time;
 	private StringItem sat;
 	private StringItem fix;
 	
+	private StringItem wp;
 	private StringItem dist;
 	
 	private WaypointScreen wps;
@@ -37,7 +40,7 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		super("MoVadis");
 		this.wps = wps;
 		System.out.println("WPS in Position screen constructor: "+wps);
-		
+		/*
 		Image img = null;
 		try {
 			img = Image.createImage(this.getClass().getResourceAsStream("../res/movadis-small.png"));
@@ -46,19 +49,26 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		}
 		ImageItem iitem = new ImageItem("Position", img, ImageItem.LAYOUT_LEFT | ImageItem.LAYOUT_TOP | ImageItem.PLAIN, "");
 		this.append(iitem);
+		*/
 		
 		lat = new StringItem("Lat: ", "?");
 		lon = new StringItem("Lon: ", "?");
-		sat = new StringItem("Satellites: ", "?");
 		fix = new StringItem("Fix: ", "None");
-		time = new StringItem("t: ", "...");
-		dist = new StringItem("D: ", "...");
+		fix.setLayout(StringItem.LAYOUT_2 | StringItem.LAYOUT_NEWLINE_BEFORE);
+		sat = new StringItem("Satellites: ", "?");
+		sat.setLayout(StringItem.LAYOUT_2 | StringItem.LAYOUT_NEWLINE_AFTER);
+		// time = new StringItem("Time: ", "...");
+		
+		wp = new StringItem("Waypoint: ", "...");
+		dist = new StringItem("Distance: ", "...");
 		
 		this.append(lat);
 		this.append(lon);
-		this.append(sat);
 		this.append(fix);
-		this.append(time);
+		this.append(sat);
+		// this.append(time);
+		
+		this.append(wp);
 		this.append(dist);
 	}
 	
@@ -86,13 +96,21 @@ public class PositionScreen extends Form implements SentenceListener, GPSDataRec
 		
 		fix.setText(gd.getFixType().toString());
 		
-		Calendar c = gd.getTime();
-		time.setText(c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND));
+		// Calendar c = gd.getTime();
+		//time.setText(c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND));
 		
-		Waypoint wp = wps.getSelectedWaypoint();
-		if (wp != null) {
-			Position wpos = wp.getPosistion();
+		Waypoint swp = wps.getWaypointManager().getCurrentWaypoint();
+		if (swp != null) {
+			wp.setText(swp.getName());
+			Position wpos = swp.getPosistion();
 			dist.setText(formatDouble(wpos.distanceTo(p))+" km");// ("+wpos.toString()+")");
 		}
 	}
+
+	public void waypointSelected(Waypoint wp, WaypointManager wpm) {
+		this.wp.setText(wp.getName());
+		this.dist.setText("?");
+	}
+
+	public void waypointAdded(Waypoint wp, WaypointManager wpm) {}
 }

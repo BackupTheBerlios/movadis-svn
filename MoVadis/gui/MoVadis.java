@@ -28,6 +28,8 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
 
+import com.sun.midp.io.BufferedConnectionAdapter;
+
 import waypoints.Waypoint;
 import waypoints.WaypointManager;
 
@@ -60,11 +62,11 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 	private static Command toPosScreen = new Command("Back", Command.BACK, 0);
 	
 	private static Command wpQuicksave = new Command("Quicksave", Command.SCREEN, 1);
-
+	
 	
 	public MoVadis() {
 		con = null;
-		disp = Display.getDisplay(this);
+		// disp is set in startApp
 		
 		dec = new GPSDecoder();
 		
@@ -74,32 +76,35 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 		wpm = new WaypointManager(disp);
 		// wpm.addWaypoint(new Waypoint("Test", new Position(51.231569f, -6.5f)));
 		
-		wps = new WaypointScreen(disp, wpm);
+		wps = new WaypointScreen(wpm);
 		wps.setCommandListener(this);
 		wps.addCommand(selectWp);
 		wps.addCommand(clearWp);
 		wps.addCommand(addWp);
 		wps.addCommand(toPosScreen);
 		wps.addCommand(wpQuicksave);
+		wps.addCommand(loadWps);
+		wps.addCommand(saveWps);
+		
+		wpm.addWaypointEventListener(wps);
 		
 		pos = new PositionScreen(disp, wps);
 		dec.addGPSDataReceivedListener(pos);
+		wpm.addWaypointEventListener(pos);
 		
 		pos.addCommand(exitCommand);
 		pos.addCommand(connectCommand);
 		pos.addCommand(simCommand);
 		
-		pos.addCommand(loadWps);
-		pos.addCommand(saveWps);
 		pos.addCommand(wpScreen);
 		
 		pos.addCommand(wpQuicksave);
 		
 		pos.setCommandListener(this);
-		
 	}
 	
 	protected void startApp() throws MIDletStateChangeException {
+		disp = Display.getDisplay(this);
 		disp.setCurrent(pos);
 	}
 
@@ -146,12 +151,21 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 			wps.update();
 			disp.setCurrent(wps);
 		} else if (cmd == selectWp) {
-			Waypoint wp = wps.getSelectedWaypoint();
+			wps.changeCurrentWaypoint();
+			Waypoint wp = wps.getWaypointManager().getCurrentWaypoint();
 			Alert a = new Alert("Waypoint selected", wp.getName()+" ("+wp.getPosistion().toString()+")", null, AlertType.INFO);
 			disp.setCurrent(a, pos);
 		} else if (cmd == addWp) {
 			WaypointInput wpi = new WaypointInput(wpm);
+			wpi.setCommandListener(this);
 			disp.setCurrent(wpi);
+		} else if (cmd == WaypointInput.saveCmd) {
+			WaypointInput wpi = (WaypointInput) dis;
+			wpi.saveWaypoint();
+			disp.setCurrent(wps);
+		} else if (cmd == WaypointInput.cancelCmd) {
+			WaypointInput wpi = (WaypointInput) dis;
+			disp.setCurrent(wps);
 		} else if (cmd == clearWp) {
 			wpm.clearWaypoints();
 			wps.update();
@@ -211,9 +225,17 @@ public class MoVadis extends MIDlet implements CommandListener, DeviceSelectionL
 	
 	// Just for debugging!
 	public void SentenceReceived(String sentence) {
-		// TODO Auto-generated method stub
-		Alert al = new Alert("Sentence", sentence, null, AlertType.INFO);
-		disp.setCurrent(al, disp.getCurrent());		
+		//Alert al = new Alert("Sentence", "->"+toHex(sentence)+"<-", null, AlertType.INFO);
+		//Alert al = new Alert("Sentence", "->"+sentence+"<-", null, AlertType.INFO);
+		//disp.setCurrent(al, disp.getCurrent());		
 	}
 	
+	private static String toHex(String msg) {
+		StringBuffer result = new StringBuffer();
+		for (int i=0; i<msg.length(); i++) {
+			char c = msg.charAt(i);
+			result.append((int)c+"|");
+		}
+		return result.toString();
+	}
 }

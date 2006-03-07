@@ -50,8 +50,8 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 		while (! buffer.hasSentence()) {
 			// We have to read as much as possible
 			byte[] input = new byte[is.available()];
-			is.read(input);
-			buffer.addData(input);
+			int bytesRead = is.read(input);
+			buffer.addData(input, bytesRead);
 		}
 	}
 	
@@ -64,7 +64,8 @@ public class GPSConnection extends GPSReceiver implements Runnable {
 				while (buffer.hasSentence()) {
 					// fetch the next NMEA sentence, inform listeners,
 					// and remove the String it from buffer
-					informListeners(buffer.getNextSentence());
+					String sentence = buffer.getNextSentence();
+					informListeners(sentence);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
